@@ -14,3 +14,6 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('body', classname = 'full')
     ]
+
+    parent_page_types = [] # questi due insieme con liste vuote impediscono alla pagina Home di creare pagine figlie 
+    subpage_types = []     #di qualsiasi tipo
