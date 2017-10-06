@@ -25,4 +25,3 @@ swagtail project for infoaut new site
 ### Requirements installation
 
 > pip install -r requirements.txt
-
