@@ -1,14 +1,11 @@
 # swagtail_infoaut
 swagtail project for infoaut new site
 
+
 ### Problems and to do list:
+-Missing search app
 
-
--"Click" on tags doesn't work
-
--Search app
-
--Home app
+-Home app improvement
 
 -Users and groups 
 
@@ -20,6 +17,10 @@ swagtail project for infoaut new site
 
 -Improve posts app
 
+### Last edits
+-Added related_links model
+-Added parent_page_type and  subpage_types in home/models and posts/models
+-"Click" on tags now works
 
 ### Requirements installation
 

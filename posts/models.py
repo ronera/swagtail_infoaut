@@ -45,6 +45,8 @@ class PostsIndexPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname = 'full')
     ]
+  
+    subpage_types = ['PostPage']  #solo pagine del tipo dato sono creabili da questa classe
 
 class PostPageTag(TaggedItemBase): 
     content_object = ParentalKey('Postpage', related_name='tagged_items') #parental key è come foreign key, lega i tag a PostPage, in più rende questa classe child di PostPage
@@ -67,22 +69,36 @@ class PostPage(Page):
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
         index.SearchField('body'),
+        index.SearchField('categorie'),
     ]
 
     content_panels = Page.content_panels + [
-        MultiFieldPanel([   #multifield è una figata, per ora ci ho messo sti 2 per leggibilità
+        MultiFieldPanel(  #multifield è una figata, per ora ci ho messo sti 3 per leggibilità
+            [  
             FieldPanel('data'),
             FieldPanel('tags'),
             FieldPanel('categorie', widget=forms.CheckboxSelectMultiple),
-        ], heading='Informazioni Post'),    
+            ], 
+        heading='Informazioni Post',
+        classname='collapsible' #evita che siano sempre tutti visibili come lista di spunte
+        ),    
         FieldPanel('intro'),
         FieldPanel('body', classname="full"),
-        InlinePanel('gallery_images', label='Galleria immagini'), #per images serve Inline
-
+        InlinePanel('gallery_images', label='Galleria immagini'), #per images serve Inline o fa casino
+        InlinePanel('related_links', label='Link correlati') #link utili
     ]
 
-    
-class PostPageGalleryImage(Orderable): #classe per le immagini dentro alla pagina Post
+class PostPageRelatedLink(Orderable):
+    page = ParentalKey(PostPage, related_name='related_links')
+    name = models.CharField(max_length=255)
+    url = models.URLField()
+
+    panels =[
+        FieldPanel('name'),
+        FieldPanel('url'),
+    ]
+
+class PostPageGalleryImage(Orderable): #classe per le immagini dentro alle pagine Post
     page = ParentalKey(PostPage, related_name='gallery_images') #vedere sopra
     image = models.ForeignKey(
         'wagtailimages.Image', on_delete=models.CASCADE, related_name='+' #models.CASCADE cancella l'entry nella gallery se la foto viene cancellata

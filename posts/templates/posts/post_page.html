@@ -14,7 +14,7 @@
         <ul>
             {% for categoria in categorie %}
                 <li style="display: inline">
-                    {% image categoria.icon fill-32x32 style="vertical-align: middle" %}
+                    {% image categoria.icon fill-32x32 style="vertical-align: middle" %} <!--ha senso questa immagine? forse too big-->
                     {{ categoria.name }}
                 </li>
             {% endfor %}
@@ -35,13 +35,25 @@
         </div>
     {% endif %}
     
-    {% for item in page.gallery_images.all %}  <!--questo for renderizza l'immagine in fondo alla pagina-->
-        <div style='float: left; margin: 10px'>
+    {% for item in page.gallery_images.all %}  <!--questo for renderizza l'immagine in fondo alla pagina,  -->
+        <div style='float: left; margin: 10px'> <!--forse meglio qualcosa di più customizzabile dall'utente, streamfield?-->
             {% image item.image fill-320x240 %}
             <p>{{ item.caption }}</p>
         </div>
         {% endfor %}
+
+    <div class='related_links'>   
+    <h3>Link Correlati</h3>        
+        {% for item in page.related_links.all %} <!--questo renderizza i related links -->
+            <li><a href='related_links'>{{ item.url }}</a></li>    
+        {% endfor %}
+    </div>
+
+
     <p><a href="{{ page.get_parent.url }}">Return to Posts</a></p>
     
+
+
+
 {% endblock %}
 
