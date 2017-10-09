@@ -1,0 +1,6 @@
+/.vscode/
+/swagtail_infoaut/__pycache__/
+/swagtail_infoaut/search/__pycache__/
+/swagtail_infoaut/posts/__pycache__/
+/swagtail_infoaut/home/__pycache__/
+/media/
