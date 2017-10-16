@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+from django.shortcuts import render
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField #parentalkey e manytomany legano una classe ad un altra, rendendola una figlia dell'altra
 from modelcluster.contrib.taggit import ClusterTaggableManager #gestisce i tag
@@ -41,6 +42,23 @@ class PostsIndexPage(Page):
         postpages = self.get_children().live().order_by('-first_published_at')
         context['postpages'] = postpages
         return context
+
+    def serve(self, request):
+        postpages = self.get_children().live().order_by('-first_published_at')
+        print(postpages)
+
+        tag = request.GET.get('tag')
+        if tag:
+            postpages = postpages.filter(postpage__tags__name=tag)
+
+        category = request.GET.get('category')
+        if category:
+            postpages = postpages.filter(postpage__categorie__name=category)
+
+        return render(request, self.template, {
+            'page': self,
+            'postpages': postpages,
+        })
 
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname = 'full')

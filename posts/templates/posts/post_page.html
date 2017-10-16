@@ -38,7 +38,7 @@
       <div>
         <h3>Tags</h3>
         {% for tag in page.tags.all %}
-          <a href="{% slugurl 'tags' %}?tag={{ tag }}" class="button small">{{ tag }}</a>
+          <a href="/?tag={{ tag }}" class="button small">{{ tag }}</a>
         {% endfor %}
     </div>
     {% endif %}
