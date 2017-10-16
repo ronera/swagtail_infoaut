@@ -1,24 +1,50 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-PostsIndexPage{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
 
-    <div class="intro">{{ page.intro|richtext }}</div>
+    <!-- Banner -->
+  <section id="banner">
+    <div class="content">
+      <header>
+        <h2>Mo’ mangiatevi ‘ste brioches</h2>
+      </header>
+      <p>E niente. Vuoto pneumatico. Avevano annunciato un G7 umanitario che avrebbe discusso dei problemi della disoccupazione tecnologica, della povertà, dei salari, ma alle roboanti dichiarazioni che avevano lanciato in queste settimane ha fatto seguito il nulla. Più che un incontro tra i rappresentanti dei sette paesi più potenti del mondo sembra di aver assistito ad un convegno di odontoiatri, solo con cravatte di lusso, banchetti dionisiaci e migliaia di poliziotti a difenderli. Il tutto ovviamente pagato con i soldi di…</p>
+      <ul class="actions">
+        <li><a href="#" class="button big">Leggi</a></li>
+      </ul>
+    </div>
+    <span class="image object">
+      <img src="https://www.infoaut.org/media/k2/items/cache/a172f47af4bc449fb4b120c695255bab_XL.jpg" alt="" />
+    </span>
+  </section>
 
-    {% for post in postpages %}
-        {% with post=post.specific%}   <!--specific serve per l'ereditarietà, senza rompe il cazzo-->
-            <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
-            {% with post.main_image as main_image %}
-                {% if main_image %}{% image main_image fill-160x100 %}{% endif %}<!--thumbnails-->
-            {% endwith %}
-        
-            <p>{{ post.intro }}</p>
-            {{ post.body|richtext }}
+  <!-- Section -->
+  <section>
+    <header class="major">
+      <h2>Ipsum sed dolor</h2>
+    </header>
+    <div class="posts">
+      {% for post in postpages %}
+      {% with post=post.specific%}
+      <article>
+        <a href="#" class="image"><img src="https://www.infoaut.org/media/k2/items/cache/a172f47af4bc449fb4b120c695255bab_XL.jpg" alt="" /></a>
+        <h3><a href="{% pageurl post %}">{{ post.title }}</a></h3>
+        {% with post.main_image as main_image %}
+          {% if main_image %}{% image main_image fill-160x100 %}{% endif %}<!--thumbnails-->
         {% endwith %}
+        <p>{{ post.intro }}</p>
+        <ul class="actions">
+          <li><a href="{% pageurl post %}" class="button">Leggi</a></li>
+        </ul>
+      </article>
+      {% endwith %}
     {% endfor %}
+    </div>
+  </section>
 
 {% endblock %}
+  
