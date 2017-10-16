@@ -1,6 +1,6 @@
 {% load static wagtailuserbar %}
 
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags posts_tags %}
 <!DOCTYPE HTML>
 <!--
   Editorial by HTML5 UP
@@ -76,10 +76,7 @@
                     <li>
                       <span class="opener">Categorie</span>
                       <ul>
-                        <li><a href="#">Nuove Destre</a></li>
-                        <li><a href="#">Conflitti Globali</a></li>
-                        <li><a href="#">Editoriali</a></li>
-                        <li><a href="#">Migranti</a></li>
+                        {% categories %}
                       </ul>
                     </li>
                   </ul>
