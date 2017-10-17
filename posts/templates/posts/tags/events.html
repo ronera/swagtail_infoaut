@@ -1,0 +1,19 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="mini-posts">
+  {% for post in events_posts %}
+  {% with post=post.specific%}
+  <article>
+    <a href="{% pageurl post %}" class="image">
+      {% with post.main_image as main_image %}
+      {% if main_image %}{% image main_image fill-160x100 %}{% endif %}
+      {% endwith %}
+    </a>
+    <p>{{ post.intro }}</p>
+  </article>
+  {% endwith %}
+  {% endfor %}
+</div>
+<ul class="actions">
+  <li><a href="/?category=Agenda" class="button">Più eventi</a></li>
+</ul>
