@@ -45,7 +45,6 @@ class PostsIndexPage(Page):
 
     def serve(self, request):
         postpages = self.get_children().live().order_by('-first_published_at')
-        print(postpages)
 
         tag = request.GET.get('tag')
         if tag:
