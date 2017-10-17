@@ -1,0 +1,142 @@
+{% load static wagtailuserbar %}
+
+{% load static wagtailcore_tags wagtailimages_tags posts_tags %}
+<!DOCTYPE HTML>
+<!--
+  Editorial by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+  <head>
+    <title>
+      {% block title %}
+          {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+      {% endblock %}
+      {% block title_suffix %}
+          {% with self.get_site.site_name as site_name %}
+              {% if site_name %}- {{ site_name }}{% endif %}
+          {% endwith %}
+      {% endblock %}
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <!--[if lte IE 8]><script src="{% static '/css/main.cssjs/ie/html5shiv.js' %}"></script><![endif]-->
+    <link rel="stylesheet" href="{% static '/css/main.css' %}" />
+    <!--[if lte IE 9]><link rel="stylesheet" href="{% static '/css/ie9.css' %}" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="{% static '/css/css/ie8.css' %}" /><![endif]-->
+    {% block extra_css %}
+    {# Override this in templates to add extra stylesheets #}
+    {% endblock %}
+  </head>
+  <body class="{% block body_class %}{% endblock %}">
+    {% wagtailuserbar %}
+
+    <!-- Wrapper -->
+      <div id="wrapper">
+
+        <!-- Main -->
+          <div id="main">
+            <div class="inner">
+
+              <!-- Header -->
+              <header id="header">
+                <a href="/" class="logo"><h1>Infoaut</h1></a>
+                <ul class="icons">
+                  <li><a href="https://twitter.com/infoaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                  <li><a href="https://www.facebook.com/infoaut.org/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                  <li><a href="https://www.youtube.com/user/InfoautVideo" class="icon fa-youtube"><span class="label">Youtube</span></a></li>
+                </ul>
+              </header>
+
+              {% block content %}
+              {% endblock %}
+
+            </div>
+          </div>
+
+        <!-- Sidebar -->
+          <div id="sidebar">
+            <div class="inner">
+
+              <!-- Search -->
+                <section id="search" class="alt">
+                  <form method="post" action="#">
+                    <input type="text" name="query" id="query" placeholder="Search" />
+                  </form>
+                </section>
+
+              <!-- Menu -->
+                <nav id="menu">
+                  <header class="major">
+                    <h2>Menu</h2>
+                  </header>
+                  <ul>
+                    <li><a href="/">Homepage</a></li>
+                    <li>
+                      <span class="opener">Categorie</span>
+                      <ul>
+                        {% categories %}
+                      </ul>
+                    </li>
+                  </ul>
+                </nav>
+
+              <!-- Section -->
+                <section>
+                  <header class="major">
+                    <h2>Ante interdum</h2>
+                  </header>
+                  <div class="mini-posts">
+                    <article>
+                      <a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+                      <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+                    </article>
+                    <article>
+                      <a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
+                      <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+                    </article>
+                    <article>
+                      <a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
+                      <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+                    </article>
+                  </div>
+                  <ul class="actions">
+                    <li><a href="#" class="button">Leggi</a></li>
+                  </ul>
+                </section>
+
+              <!-- Section -->
+                <section>
+                  <header class="major">
+                    <h2>Get in touch</h2>
+                  </header>
+                  <ul class="contact">
+                    <li class="fa-twitter"><a href="https://twitter.com/infoaut">Twitter</a></li>
+                    <li class="fa-facebook"><a href="https://www.facebook.com/infoaut.org/">Facebook</a></li>
+                    <li class="fa-youtube"><a href="https://www.youtube.com/user/InfoautVideo">Youtube</a></li>
+                  </ul>
+                </section>
+
+              <!-- Footer -->
+                <footer id="footer">
+                  <p class="copyright">Infoaut {% now "Y" %} - Facciamo Movimento per il Movimento.</p>
+                </footer>
+
+            </div>
+          </div>
+
+      </div>
+
+    <!-- Scripts -->
+    <link rel="stylesheet" href="" />
+      <script src="{% static '/js/jquery.min.js' %}"></script>
+    <script src="{% static '/js/skel.min.js' %}"></script>
+    <script src="{% static '/js/util.js' %}"></script>
+    <!--[if lte IE 8]><script src="{% static '/js/ie/respond.min.js' %}"></script><![endif]-->
+    <script src="{% static '/js/main.js' %}"></script>
+    {% block extra_js %}
+    {# Override this in templates to add extra javascript #}
+    {% endblock %}
+  </body>
+</html>

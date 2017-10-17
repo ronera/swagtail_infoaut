@@ -1,59 +1,48 @@
-{% extends "base.html" %}
+{% extends "posts/base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %} <!--ricordarsi di caricare sti moduli-->
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-postpage{% endblock %}
 
 {% block content %}
+  <section>
     <h1>{{ page.title }}</h1>
-    <p class = "meta">{{ page.data }}</p>
-    
-    {% with categorie=page.categorie.all %}
-    {% if categorie %}
-        <h3>Categoria:</h3>    <!--il risultato non mi piace molto, da decidere-->
-        <ul>
-            {% for categoria in categorie %}
-                <li style="display: inline">
-                    {% image categoria.icon fill-32x32 style="vertical-align: middle" %} <!--ha senso questa immagine? forse too big-->
-                    {{ categoria.name }}
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-{% endwith %}
+    <p class="meta">{{ page.data }}</p>
 
-    <div class="intro">{{ page.intro }}</div>
+    {% with categorie=page.categorie.all %}
+      {% if categorie %}
+        <strong>Categoria:</strong>
+
+        {% for categoria in categorie %}
+        <a href="#" class="button special small">{{ categoria.name }}</a>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <hr />
 
     {{ page.body|richtext }}
-    
-    {% if page.tags.all.count %}      <!--questo if renderizza i tags in fondo alla pagina-->
-        <div class="tags">
-            <h3>Tags</h3>
-            {% for tag in page.tags.all %}
-                <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
-            {% endfor %}
-        </div>
-    {% endif %}
-    
-    {% for item in page.gallery_images.all %}  <!--questo for renderizza l'immagine in fondo alla pagina,  -->
-        <div style='float: left; margin: 10px'> <!--forse meglio qualcosa di più customizzabile dall'utente, streamfield?-->
-            {% image item.image fill-320x240 %}
-            <p>{{ item.caption }}</p>
-        </div>
-        {% endfor %}
 
-    <div class='related_links'>   
-    <h3>Link Correlati</h3>        
-        {% for item in page.related_links.all %} <!--questo renderizza i related links -->
-            <li><a href='related_links'>{{ item.url }}</a></li>    
-        {% endfor %}
+    <hr />
+
+    <div>
+      <h3>Link Correlati</h3>
+      {% for item in page.related_links.all %}
+        <li><a href='{{ item.url }}'>{{ item.url }}</a></li>
+      {% endfor %}
     </div>
 
+    <hr />
 
-    <p><a href="{{ page.get_parent.url }}">Return to Posts</a></p>
-    
-
-
+    {% if page.tags.all.count %}
+      <div>
+        <h3>Tags</h3>
+        {% for tag in page.tags.all %}
+          <a href="/?tag={{ tag }}" class="button small">{{ tag }}</a>
+        {% endfor %}
+    </div>
+    {% endif %}
+  </section>
 
 {% endblock %}
 
