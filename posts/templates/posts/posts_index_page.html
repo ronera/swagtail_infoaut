@@ -7,20 +7,28 @@
 {% block content %}
 
     <!-- Banner -->
+  {% if editorial %}
   <section id="banner">
+    {% with editorial=editorial.specific%}
     <div class="content">
       <header>
-        <h2>Mo’ mangiatevi ‘ste brioches</h2>
+        <h2>{{ editorial.title }}</h2>
       </header>
-      <p>E niente. Vuoto pneumatico. Avevano annunciato un G7 umanitario che avrebbe discusso dei problemi della disoccupazione tecnologica, della povertà, dei salari, ma alle roboanti dichiarazioni che avevano lanciato in queste settimane ha fatto seguito il nulla. Più che un incontro tra i rappresentanti dei sette paesi più potenti del mondo sembra di aver assistito ad un convegno di odontoiatri, solo con cravatte di lusso, banchetti dionisiaci e migliaia di poliziotti a difenderli. Il tutto ovviamente pagato con i soldi di…</p>
+      <p>{{ editorial.intro }}</p>
       <ul class="actions">
-        <li><a href="#" class="button big">Leggi</a></li>
+        <li><a href="{% pageurl editorial %}" class="button big">Leggi</a></li>
       </ul>
     </div>
     <span class="image object">
-      <img src="https://www.infoaut.org/media/k2/items/cache/a172f47af4bc449fb4b120c695255bab_XL.jpg" alt="" />
+      {% if editorial.main_image %}
+      <a href="{% pageurl editorial %}" class="image">
+        {% image editorial.main_image fill-160x100 %}
+      </a>
+      {% endif %}
     </span>
+    {% endwith %}
   </section>
+  {% endif %}
 
   <!-- Section -->
   <section>
